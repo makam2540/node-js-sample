@@ -3,11 +3,29 @@ var bodyParser = require('body-parser')
 var request = require('request')
 var app = express()
 
+var sql = require('mssql');
+var sqlInstance = require("mssql");
+var nodemailer = require('nodemailer');
+
 app.use(bodyParser.json())
 
-app.set('port', (process.env.PORT || 4000))
+app.set('port', (process.env.PORT || 7777))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
+
+// connect to your database
+
+ var dbConfig = {
+                      user: 'sa',
+                      password: 'p@ssw0rd',
+                      server: 'localhost', 
+                      database: 'DB1',
+                      port:1433,
+                      options: {
+                          encrypt: false // Use this if you're on Windows Azure
+                      }                      
+    };
+
 
 app.post('/webhook', (req, res) => {
   var msg = req.body.events[0].message.text

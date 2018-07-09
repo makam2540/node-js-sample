@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 
 var dbConfig = {
     user: 'sa',
-    password: 'p@ssw0rd1234',
+    password: 'P@ssw0rd1234',
     server: 'demomagic2.southeastasia.cloudapp.azure.com', 
     database: 'LinebotDB',
     port:1433,
@@ -68,29 +68,20 @@ app.post('/webhook', (req, res) => {
         conn.connect().then(function () {
             var req = new sql.Request(conn);
                         req.query('SELECT * FROM Question WHERE q_topic = '+ msg).then(function (recordset) {
-                            res.send(recordset);  
-                                
+                            res.send(recordset);          
                       })
-                      .catch(function (err) {
-                          conn.close();
-                          res.send(err);
-                      });        
-        })
-        .catch(function (err) {
-            res.send(err);
-        });
-});
+ });
 
-    function sendText (sender, msg) {
-    let data = {
-        to: sender,
-        messages: [
-        {
-            type: 'text',
-            text: 'สวัสดีค่ะ'
+        function sendText (sender, msg) {
+        let data = {
+            to: sender,
+            messages: [
+            {
+                type: 'text',
+                text: 'สวัสดีค่ะ'
+            }
+            ]
         }
-        ]
-    }
   request({
     headers: {
       'Content-Type': 'application/json',

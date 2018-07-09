@@ -33,7 +33,7 @@ app.post('/webhook', (req, res) => {
     var conn = new sql.ConnectionPool(dbConfig);
     conn.connect().then(function () {
                   var req = new sql.Request(conn);
-                  req.query('SELECT * FROM Question').then(function (recordset) {
+                  req.query('SELECT * FROM Question q_topic = '+msg).then(function (recordset) {
                     
         res.sendStatus(200)
   })
@@ -77,7 +77,7 @@ app.post('/webhook', (req, res) => {
     .catch(function (err) {
     res.send(err);
     });
-    
+
     app.listen(port, function() {
       console.log('Starting node.js on port ' + port);
   });

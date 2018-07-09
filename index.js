@@ -26,25 +26,34 @@ var dbConfig = {
 
 
 
+app.post('/webhook', (req, res) => {
+    var msg = req.body.events[0].message.text
+    var sender = req.body.events[0].source.userId
+    var replyToken = req.body.events[0].replyToken
+    console.log(text, sender, replyToken)
+    console.log(typeof sender, typeof text)
+    // console.log(req.body.events[0])
+    
+            var conn = new sql.ConnectionPool(dbConfig);
+            conn.connect().then(function () {
+                        var req = new sql.Request(conn);
+                        req.query('SELECT * FROM Question WHERE q_topic = '+ msg).then(function (recordset) {
+                            res.send(recordset);
+                                // res.send(recordset);
+                                // conn.close();                    
+                        })
+                        .catch(function (err) {
+                            conn.close();
+                            res.send(err);
+                        });        
+            })
+            .catch(function (err) {
+                res.send(err);
+            });
 
-app.get('/users', function (req, res) {
-    var conn = new sql.ConnectionPool(dbConfig);
-    conn.connect().then(function () {
-                  var req = new sql.Request(conn);
-                  req.query('SELECT * FROM Customer').then(function (recordset) {
-                    res.send(recordset);
-                        // res.send(recordset);
-                        // conn.close();                    
-                  })
-                  .catch(function (err) {
-                      conn.close();
-                      res.send(err);
-                  });        
-    })
-    .catch(function (err) {
-        res.send(err);
-    });
-});
+    res.sendStatus(200)
+  })
+
 
 
 
@@ -60,19 +69,7 @@ app.post('/webhook', (req, res) => {
             var req = new sql.Request(conn);
                         req.query('SELECT * FROM Question WHERE q_topic = '+ msg).then(function (recordset) {
                             res.send(recordset);  
-                            
-                            function sendText (sender, msg) {
-                                let data = {
-                                  to: sender,
-                                  messages: [
-                                    {
-                                      type: 'text',
-                                      text: 'สวัสดีค่ะ'
-                                    }
-                                  ]
-                                }
-
-                            
+                                
                       })
                       .catch(function (err) {
                           conn.close();
@@ -84,6 +81,16 @@ app.post('/webhook', (req, res) => {
         });
 });
 
+    function sendText (sender, msg) {
+    let data = {
+        to: sender,
+        messages: [
+        {
+            type: 'text',
+            text: 'สวัสดีค่ะ'
+        }
+        ]
+    }
   request({
     headers: {
       'Content-Type': 'application/json',
@@ -98,8 +105,13 @@ app.post('/webhook', (req, res) => {
     if (res) console.log('success')
     if (body) console.log(body)
   })
+}
 
 
 app.listen(app.get('port'), function () {
   console.log('run at port', app.get('port'))
 })
+
+app.listen(port, function() {
+    console.log('Starting node.js on port ' + port);
+});

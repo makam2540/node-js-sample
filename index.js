@@ -8,6 +8,9 @@ app.use(bodyParser.json())
 app.set('port', (process.env.PORT || 4000))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
+app.get('/', function(request, response) {
+  response.send('Hello Worldaaaaaa!')
+})
 
 app.post('/webhook', (req, res) => {
   var text = req.body.events[0].message.text

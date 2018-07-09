@@ -24,7 +24,7 @@ function reply(reply_token, msg) {
             text: 'Hello'
         },
         {
-           // type: 'text',
+            type: 'text',
             text: 'How are you?'
         }]
     })

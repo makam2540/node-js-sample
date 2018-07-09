@@ -14,20 +14,31 @@ app.get('/', function(request, response) {
 })
 
 app.post('/webhook', (req, res) => {
-    res.sendStatus(200)
+  
+  var text = req.body.events[0].message.text
+  var sender = req.body.events[0].source.userId
+  var replyToken = req.body.events[0].replyToken
+  console.log(text, sender, replyToken)
+  console.log(typeof sender, typeof text)
+  // console.log(req.body.events[0])
+  if (text === 'สวัสดี' || text === 'Hello' || text === 'hello') {
+    sendText(sender, text)
+    response.send('Hello ss!')
+  }
+  res.sendStatus(200)
 })
 
 
-function sendText (sender, text) {
-  let data = {
-    to: sender,
-    messages: [
-      {
-        type: 'text',
-        text: 'สวัสดีค่ะ เราเป็นผู้ช่วยปรึกษาด้านความรัก สำหรับหมามิ้น 💞'
-      }
-    ]
-  }
+// function sendText (sender, text) {
+//   let data = {
+//     to: sender,
+//     messages: [
+//       {
+//         type: 'text',
+//         text: 'สวัสดีค่ะ เราเป็นผู้ช่วยปรึกษาด้านความรัก สำหรับหมามิ้น 💞'
+//       }
+//     ]
+//   }
 //   request({
 //     headers: {
 //       'Content-Type': 'application/json',
@@ -42,7 +53,7 @@ function sendText (sender, text) {
 //     if (res) console.log('success')
 //     if (body) console.log(body)
 //   })
-}
+// }
 
 
 app.listen(app.get('port'), function() {

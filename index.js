@@ -33,7 +33,7 @@ function sendText (sender, text) {
     messages: [
       {
         type: 'text',
-        text: 'สวัสดีค่ะ เราเป็นผู้ช่วยปรึกษาด้านความรัก สำหรับหมามิ้น 💞'
+        text: 'สวัสดีค่ะ เราเป็นผู้ช่วยปรึกษาด้านความรัก'
       }
     ]
   }
@@ -42,7 +42,7 @@ function sendText (sender, text) {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer 7YR60AJ855Zu1Etxsc7aCdFqhip1o8yAKj7PzLe90ClE9Po0fz5o81BeghtpCki4+zFZ7FrYjjbrFvQw84+Axi+P1zWPnxSCTl/lF5gVTDaDqdC5IHk30qnjo7GQ1hHKizexgGNpBPn/Fwz3slJqkQdB04t89/1O/w1cDnyilFU='
     },
-    url: 'https://api.line.me/v2/bot/message/push',
+    url: 'https://api.line.me/v2/bot/message/reply',
     method: 'POST',
     body: data,
     json: true

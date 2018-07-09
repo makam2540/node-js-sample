@@ -9,7 +9,7 @@ var nodemailer = require('nodemailer')
 
 app.use(bodyParser.json())
 
-app.set('port', (process.env.PORT || 7777))
+app.set('port', (process.env.PORT || 4000))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
@@ -24,31 +24,66 @@ var dbConfig = {
     }                      
 };
 
+
+
+
+app.get('/users', function (req, res) {
+    var conn = new sql.ConnectionPool(dbConfig);
+    conn.connect().then(function () {
+                  var req = new sql.Request(conn);
+                  req.query('SELECT * FROM Customer').then(function (recordset) {
+                    res.send(recordset);
+                        // res.send(recordset);
+                        // conn.close();                    
+                  })
+                  .catch(function (err) {
+                      conn.close();
+                      res.send(err);
+                  });        
+    })
+    .catch(function (err) {
+        res.send(err);
+    });
+});
+
+
+
 app.post('/webhook', (req, res) => {
   var msg = req.body.events[0].message.text
   var sender = req.body.events[0].source.userId
   var replyToken = req.body.events[0].replyToken
   console.log(text, sender, replyToken)
   console.log(typeof sender, typeof text)
-  // console.log(req.body.events[0])
-  if (msg === 'สวัสดี' || msg === 'Hello' || msg === 'hello') {
-    sendText(sender, msg)
-  }
-  res.sendStatus(200)
-}    )
 
-function sendText (sender, msg) {
-  let data = {
-    to: sender,
-    messages: [
-      {
-        type: 'text',
-        text: 'สวัสดีค่ะ'
-      }
-    ]
-  }
+        var conn = new sql.ConnectionPool(dbConfig);
+        conn.connect().then(function () {
+            var req = new sql.Request(conn);
+                        req.query('SELECT * FROM Question WHERE q_topic = '+ msg).then(function (recordset) {
+                            res.send(recordset);  
+                            
+                            function sendText (sender, msg) {
+                                let data = {
+                                  to: sender,
+                                  messages: [
+                                    {
+                                      type: 'text',
+                                      text: 'สวัสดีค่ะ'
+                                    }
+                                  ]
+                                }
 
-  
+                            
+                      })
+                      .catch(function (err) {
+                          conn.close();
+                          res.send(err);
+                      });        
+        })
+        .catch(function (err) {
+            res.send(err);
+        });
+});
+
   request({
     headers: {
       'Content-Type': 'application/json',
@@ -63,7 +98,7 @@ function sendText (sender, msg) {
     if (res) console.log('success')
     if (body) console.log(body)
   })
-}
+
 
 app.listen(app.get('port'), function () {
   console.log('run at port', app.get('port'))

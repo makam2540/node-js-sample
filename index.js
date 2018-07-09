@@ -24,85 +24,60 @@ var dbConfig = {
     }                      
 };
 
-
-
 app.post('/webhook', (req, res) => {
     var msg = req.body.events[0].message.text
     var sender = req.body.events[0].source.userId
     var replyToken = req.body.events[0].replyToken
     console.log(text, sender, replyToken)
     console.log(typeof sender, typeof text)
-    // console.log(req.body.events[0])
-    
-            var conn = new sql.ConnectionPool(dbConfig);
-            conn.connect().then(function () {
-                        var req = new sql.Request(conn);
-                        req.query('SELECT * FROM Question WHERE q_topic = '+ msg).then(function (recordset) {
-                            res.send(recordset);
-                                // res.send(recordset);
-                                // conn.close();                    
-                        })
-                        .catch(function (err) {
-                            conn.close();
-                            res.send(err);
-                        });        
-            })
-            .catch(function (err) {
-                res.send(err);
-            });
-
-    res.sendStatus(200)
+    var conn = new sql.ConnectionPool(dbConfig);
+    conn.connect().then(function () {
+                  var req = new sql.Request(conn);
+                  req.query('SELECT * FROM Question').then(function (recordset) {
+                    
+        res.sendStatus(200)
   })
-
-
-
-
-app.post('/webhook', (req, res) => {
-  var msg = req.body.events[0].message.text
-  var sender = req.body.events[0].source.userId
-  var replyToken = req.body.events[0].replyToken
-  console.log(text, sender, replyToken)
-  console.log(typeof sender, typeof text)
-
-        var conn = new sql.ConnectionPool(dbConfig);
-        conn.connect().then(function () {
-            var req = new sql.Request(conn);
-                        req.query('SELECT * FROM Question WHERE q_topic = '+ msg).then(function (recordset) {
-                            res.send(recordset);          
-                      })
- });
-
-        function sendText (sender, msg) {
-        let data = {
-            to: sender,
-            messages: [
-            {
-                type: 'text',
-                text: 'สวัสดีค่ะ'
-            }
-            ]
+  
+  function sendText (sender, msg) {
+    let data = {
+      to: sender,
+      messages: [
+        {
+          type: 'text',
+          text: 'สวัสดีค่ะ'
         }
-  request({
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer {Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU=}'
-    },
-    url: 'https://api.line.me/v2/bot/message/push',
-    method: 'POST',
-    body: data,
-    json: true
-  }, function (err, res, body) {
-    if (err) console.log('error')
-    if (res) console.log('success')
-    if (body) console.log(body)
+      ]
+    }
+    request({
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer {Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU=}'
+      },
+      url: 'https://api.line.me/v2/bot/message/push',
+      method: 'POST',
+      body: data,
+      json: true
+    }, function (err, res, body) {
+      if (err) console.log('error')
+      if (res) console.log('success')
+      if (body) console.log(body)
+    })
+  }
+  
+  app.listen(app.get('port'), function () {
+    console.log('run at port', app.get('port'))
   })
-}
 
-
-app.listen(app.get('port'), function () {
-  console.log('run at port', app.get('port'))
-})
-
-app.listen(port, function() {
-    console.log('Starting node.js on port ' + port);
-});
+    })
+    .catch(function (err) {
+        conn.close();
+        res.send(err);
+    });        
+    })
+    .catch(function (err) {
+    res.send(err);
+    });
+    
+    app.listen(port, function() {
+      console.log('Starting node.js on port ' + port);
+  });

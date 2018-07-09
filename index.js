@@ -21,7 +21,11 @@ function reply(reply_token, msg) {
         replyToken: reply_token,
         messages: [{
             type: 'text',
-            text: msg
+            text: 'Hello'
+        },
+        {
+            type: 'text',
+            text: 'How are you?'
         }]
     })
     request.post({

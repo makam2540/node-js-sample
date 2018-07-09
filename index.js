@@ -10,25 +10,25 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 app.post('/webhook', (req, res) => {
-  var msg = req.body.events[0].message.text
+  var text = req.body.events[0].message.text
   var sender = req.body.events[0].source.userId
   var replyToken = req.body.events[0].replyToken
   console.log(text, sender, replyToken)
   console.log(typeof sender, typeof text)
   // console.log(req.body.events[0])
-  if (msg === 'สวัสดี' || msg === 'Hello' || msg === 'hello') {
-    sendText(sender, msg)
+  if (text === 'สวัสดี' || text === 'Hello' || text === 'hello') {
+    sendText(sender, text)
   }
   res.sendStatus(200)
-}    )
+})
 
-function sendText (sender, msg) {
+function sendText (sender, text) {
   let data = {
     to: sender,
     messages: [
       {
         type: 'text',
-        text: 'สวัสดีค่ะ'
+        text: 'สวัสดีค่ะ เราเป็นผู้ช่วยปรึกษาด้านความรัก สำหรับหมามิ้น 💞'
       }
     ]
   }

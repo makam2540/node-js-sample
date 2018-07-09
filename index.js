@@ -10,7 +10,8 @@ app.post('/webhook', (req, res) => {
     let msg = req.body.events[0].message.text
     var sender = req.body.events[0].source.userId
 
-    reply(reply_token, msg)
+   // reply(reply_token, msg)
+    console.log(text, sender, replyToken)
     console.log(typeof sender, typeof text)
     if (msg === 'สวัสดี') {
           sendText(sender, text)

@@ -53,12 +53,12 @@ function sendText (sender, msg) {
   conn.connect(function(err) {
   
                 var req = new sql.Request(conn);
-                req.query('SELECT * FROM Question',function (err, result, rows) {
+                req.query('SELECT * FROM Question',function (err, result) {
                   // rows.rowsAffected
                       
-                          if(text == result.result[0].q_topic){
-                            var ques_id = result.result[0].q_Id;
-                          }
+                          // if(text == result.result[0].q_topic){
+                          //   var ques_id = result.result[0].q_Id;
+                          // }
                  
                      // recordset.recordset[0].q_Id;
                   let data = {

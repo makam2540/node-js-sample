@@ -5,6 +5,7 @@ var app = express()
 
 
 var Q_id
+var topic
 
 var sql = require('mssql')
 var sqlInstance = require("mssql")
@@ -64,13 +65,13 @@ function sendText (sender, msg) {
                     }
                   }
                   
-                    // req.query('SELECT * FROM Answer a_Id = '+ Q_id,function(err,resulta){
+                    req.query('SELECT * FROM Answer ',function(err,resulta){
 
-                    //       for(var i=0;i<result.rowsAffected;i++){
-                    //         if(result.recordset[i].q_topic == msg){
-                    //           Q_id = result.recordset[i].q_Id
-                    //         }
-                    //       }
+                          for(var i=0;i<result.rowsAffected;i++){
+                            if(resulta.recordset[i].q_topic == Q_id){
+                                topic = resulta.recordset[i].a_topic
+                            }
+                          }
                    
 
                           let data = {
@@ -78,7 +79,7 @@ function sendText (sender, msg) {
                             messages: [
                               {
                                 type: 'text',
-                                text: Q_id
+                                text: topic
                               }
                             ]
                           }

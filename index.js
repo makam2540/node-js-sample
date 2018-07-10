@@ -99,7 +99,7 @@ function sendText (sender, msg) {
                     if (body) console.log(body)
                   })
                 })
-          // })
+          })
          })
 
 }

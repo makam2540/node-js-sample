@@ -61,7 +61,7 @@ function sendText (sender, msg) {
                     messages: [
                       {
                         type: 'text',
-                        text: result.recordset[0].q_Id
+                        text: result.affectedRows
                       }
                     ]
                   }

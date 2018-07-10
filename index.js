@@ -12,26 +12,26 @@ app.set('port', (process.env.PORT || 4000))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
-// var port = process.env.PORT || 7777;
+var port = process.env.PORT || 7777;
 
-// // parse application/json
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({
-// 	extended: true
-// }));
+// parse application/json
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
 
-// // connect to your database
+// connect to your database
 
-//  var dbConfig = {
-//                       user: 'sa',
-//                       password: 'P@ssw0rd1234',
-//                       server: 'demomagic2.southeastasia.cloudapp.azure.com', 
-//                       database: 'LinebotDB',
-//                       port:1433,
-//                       options: {
-//                           encrypt: false // Use this if you're on Windows Azure
-//                       }                      
-//     };
+ var dbConfig = {
+                      user: 'sa',
+                      password: 'P@ssw0rd1234',
+                      server: 'demomagic2.southeastasia.cloudapp.azure.com', 
+                      database: 'LinebotDB',
+                      port:1433,
+                      options: {
+                          encrypt: false // Use this if you're on Windows Azure
+                      }                      
+    };
 
 app.post('/webhook', (req, res) => {
   var text = req.body.events[0].message.text

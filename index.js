@@ -41,12 +41,12 @@ app.post('/webhook', (req, res) => {
   console.log(typeof sender, typeof text)
   // console.log(req.body.events[0])
   if (msg === 'สวัสดี' || msg === 'Hello' || msg === 'hello') {
-    sendText(sender, msg)
+    sendText(sender, text)
   }
   res.sendStatus(200)
 })
 
-function sendText (sender, msg) {
+function sendText (sender, text) {
   let data = {
     to: sender,
     messages: [

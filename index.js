@@ -46,7 +46,8 @@ app.post('/webhook', (req, res) => {
                         var req = new sql.Request(conn);
                         req.query('SELECT * FROM Question q_Id = '+text).then(function (recordset) {
                           // res.send(recordset);
-                          sendText(sender, text)                   
+                          sendText(sender, text) 
+                          res.sendStatus(200)                  
                         })
                         .catch(function (err) {
                             conn.close();
@@ -61,7 +62,7 @@ app.post('/webhook', (req, res) => {
   // if (text === 'สวัสดี' || text === 'Hello' || text === 'hello') {
   //   sendText(sender, text)
   // }
-  res.sendStatus(200)
+  // res.sendStatus(200)
 })
 
 function sendText (sender, text) {

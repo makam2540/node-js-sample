@@ -61,7 +61,7 @@ function sendText (sender, msg) {
                     messages: [
                       {
                         type: 'text',
-                        text: row.rowAffected
+                        text: rows.rowsAffected
                       }
                     ]
                   }

@@ -59,7 +59,7 @@ function sendText (sender, msg) {
                             messages: [
                               {
                                 type: 'text',
-                                text: console.log(typeof text)
+                                text: typeof text
                               }
                             ]
                           }

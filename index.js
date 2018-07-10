@@ -1,8 +1,5 @@
-var app = require('express')();
-
-var sql = require('mssql');
-var sqlInstance = require("mssql");
-var bodyParser = require('body-parser');
+var express = require('express')
+var bodyParser = require('body-parser')
 var request = require('request')
 var app = express()
 
@@ -11,7 +8,6 @@ app.use(bodyParser.json())
 app.set('port', (process.env.PORT || 4000))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
-
 
 app.post('/webhook', (req, res) => {
   var msg = req.body.events[0].message.text
@@ -55,4 +51,3 @@ function sendText (sender, msg) {
 app.listen(app.get('port'), function () {
   console.log('run at port', app.get('port'))
 })
-

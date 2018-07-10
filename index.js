@@ -34,13 +34,13 @@ app.use(bodyParser.urlencoded({
     };
 
 app.post('/webhook', (req, res) => {
-  var msg = req.body.events[0].message.text
+  var text = req.body.events[0].message.text
   var sender = req.body.events[0].source.userId
   var replyToken = req.body.events[0].replyToken
   console.log(text, sender, replyToken)
   console.log(typeof sender, typeof text)
   // console.log(req.body.events[0])
-  if (msg === 'สวัสดี' || msg === 'Hello' || msg === 'hello') {
+  if (text === 'สวัสดี' || text === 'Hello' || text === 'hello') {
     sendText(sender, text)
   }
   res.sendStatus(200)

@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({
                       database: 'LinebotDB',
                       port:1433,
                       options: {
-                          encrypt: false // Use this if you're on Windows Azure
+                          encrypt: true // Use this if you're on Windows Azure
                       }                      
     };
 
@@ -41,39 +41,53 @@ app.post('/webhook', (req, res) => {
   console.log(text, sender, replyToken)
   console.log(typeof sender, typeof text)
   // console.log(req.body.events[0])
-
-   if (text === 'สวัสดี' || text === 'Hello' || text === 'hello') {
     sendText(sender, text)
-  }
+
   res.sendStatus(200)
 })
 
-function sendText (sender, text) {
-  let data = {
-    to: sender,
-    messages: [
-      {
-        type: 'text',
-        text: 'สวัสดีค่ะ'
-      }
-    ]
-  }
 
-  request({
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU='
-    },
-    url: 'https://api.line.me/v2/bot/message/push',
-    method: 'POST',
-    body: data,
-    json: true
-  }, function (err, res, body) {
-    if (err) console.log('error')
-    if (res) console.log('success')
-    if (body) console.log(body)
-  })
+
+
+function sendText (sender, msg) {
+  var conn = new sql.ConnectionPool(dbConfig);
+  conn.connect().then(function () {
+                var req = new sql.Request(conn);
+                req.query('SELECT * FROM Question').then(function (recordset) {
+                      //recordset.recordset[0].q_Id;
+                  let data = {
+                    to: sender,
+                    messages: [
+                      {
+                        type: 'text',
+                        text: recordset.recordset[0].q_Id
+                      }
+                    ]
+                  }
+                
+                  request({
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU='
+                    },
+                    url: 'https://api.line.me/v2/bot/message/push',
+                    method: 'POST',
+                    body: data,
+                    json: true
+                  }, function (err, res, body) {
+                    if (err) console.log('error')
+                    if (res) console.log('success')
+                    if (body) console.log(body)
+                  })
+   
+          })
+         })
+
+
+
+  
 }
+
 
 app.listen(app.get('port'), function () {
   console.log('run at port', app.get('port'))

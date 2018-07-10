@@ -58,7 +58,7 @@ function sendText (sender, msg) {
                     messages: [
                       {
                         type: 'text',
-                        text: field.recordset
+                        text: field.recordset[2]
                       }
                     ]
                   }

@@ -46,7 +46,7 @@ app.post('/webhook', (req, res) => {
   res.sendStatus(200)
 })
 
-var ques_id;
+
 function sendText (sender, msg) {
   var conn = new sql.ConnectionPool(dbConfig);
  
@@ -57,7 +57,7 @@ function sendText (sender, msg) {
                   // rows.rowsAffected
                       
                           if(text == result.result[0].q_topic){
-                            ques_id = result.result[0].q_Id;
+                            var ques_id = result.result[0].q_Id;
                           }
                  
                      // recordset.recordset[0].q_Id;
@@ -66,7 +66,7 @@ function sendText (sender, msg) {
                     messages: [
                       {
                         type: 'text',
-                        text: ques_id
+                        text: result.result[0].q_Id
                       }
                     ]
                   }

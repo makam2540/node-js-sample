@@ -91,7 +91,7 @@ function sendText (sender, msg) {
                             messages: [
                               {
                                 type: 'text',
-                                text: typeOf(topic)
+                                text: topic
                               }
                             ]
                           }

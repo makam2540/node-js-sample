@@ -12,49 +12,39 @@ app.set('port', (process.env.PORT || 4000))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
-var port = process.env.PORT || 7777;
+// var port = process.env.PORT || 7777;
 
-// parse application/json
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-	extended: true
-}));
+// // parse application/json
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({
+// 	extended: true
+// }));
 
-// connect to your database
+// // connect to your database
 
- var dbConfig = {
-                      user: 'sa',
-                      password: 'P@ssw0rd1234',
-                      server: 'demomagic2.southeastasia.cloudapp.azure.com', 
-                      database: 'LinebotDB',
-                      port:1433,
-                      options: {
-                          encrypt: false // Use this if you're on Windows Azure
-                      }                      
-    };
+//  var dbConfig = {
+//                       user: 'sa',
+//                       password: 'P@ssw0rd1234',
+//                       server: 'demomagic2.southeastasia.cloudapp.azure.com', 
+//                       database: 'LinebotDB',
+//                       port:1433,
+//                       options: {
+//                           encrypt: false // Use this if you're on Windows Azure
+//                       }                      
+//     };
 
 app.post('/webhook', (req, res) => {
   var text = req.body.events[0].message.text
   var sender = req.body.events[0].source.userId
   var replyToken = req.body.events[0].replyToken
+
   console.log(text, sender, replyToken)
   console.log(typeof sender, typeof text)
   // console.log(req.body.events[0])
 
-        var conn = new sql.ConnectionPool(dbConfig);
-          conn.connect().then(function () {
-                        var req = new sql.Request(conn);
-                        req.query('SELECT * FROM Question q_Id = '+text).then(function (recordset) {
-                          // res.send(recordset);
-                          sendText(sender, text) 
-                                       
-                        })         
-          });
-
-
-  // if (text === 'สวัสดี' || text === 'Hello' || text === 'hello') {
-  //   sendText(sender, text)
-  // }
+   if (text === 'สวัสดี' || text === 'Hello' || text === 'hello') {
+    sendText(sender, text)
+  }
   res.sendStatus(200)
 })
 

@@ -45,7 +45,7 @@ app.post('/webhook', (req, res) => {
           conn.connect().then(function () {
                         var req = new sql.Request(conn);
                         req.query('SELECT * FROM Question q_Id = '+text).then(function (recordset) {
-                          res.send(recordset);
+                          // res.send(recordset);
                           sendText(sender, text)                   
                         })
                         .catch(function (err) {

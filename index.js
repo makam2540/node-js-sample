@@ -67,7 +67,7 @@ function sendText (sender, msg) {
                             messages: [
                               {
                                 type: 'text',
-                                text: Q_id
+                                text: 'id='+ Q_id
                               }
                             ]
                           }

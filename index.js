@@ -58,20 +58,27 @@ function sendText (sender, msg) {
                 var req = new sql.Request(conn);
                 req.query('SELECT * FROM Question',function (err, result) {
                  
-                  if(result.recordset[0].q_topic == msg){
-                         Q_id = result.recordset[0].q_Id
+                  for(var i=0;i<result.rowsAffected;i++){
+                    if(result.recordset[0].q_topic == msg){
+                      Q_id = result.recordset[0].q_Id
+                    }
                   }
+                   
+
+                    // req.query('SELECT * FROM Answer a_Id = '+ Q_id,function(err,resulta){
+
+                   
+
                           let data = {
                             to: sender,
                             messages: [
                               {
                                 type: 'text',
-                                text: Q_id
+                                text: 
                               }
                             ]
                           }
                   
-
                   request({
                     headers: {
                       'Content-Type': 'application/json',
@@ -86,8 +93,8 @@ function sendText (sender, msg) {
                     if (res) console.log('success')
                     if (body) console.log(body)
                   })
-   
-          })
+                })
+          // })
          })
 
 }

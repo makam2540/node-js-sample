@@ -20,26 +20,9 @@ app.post('/webhook', (req, res) => {
   console.log(text, sender, replyToken)
   console.log(typeof sender, typeof text)
   // console.log(req.body.events[0])
-          var conn = new sql.ConnectionPool(dbConfig);
-          conn.connect().then(function () {
-                        var req = new sql.Request(conn);
-                        req.query('SELECT * FROM Question q_topic ='+msg).then(function (recordset) {
-                          // res.send(recordset);
-                              // res.send(recordset);
-                              // conn.close();    
-                              sendText(sender, msg)                
-                        })
-                        .catch(function (err) {
-                            conn.close();
-                            res.send(err);
-                        });        
-          })
-          .catch(function (err) {
-              res.send(err);
-          });
-  // if (msg === 'สวัสดี' || msg === 'Hello' || msg === 'hello') {
-  //   sendText(sender, msg)
-  // }
+  if (msg === 'สวัสดี' || msg === 'Hello' || msg === 'hello') {
+    sendText(sender, msg)
+  }
   res.sendStatus(200)
 })
 
@@ -68,10 +51,6 @@ function sendText (sender, msg) {
     if (body) console.log(body)
   })
 }
-
-app.listen(port, function() {
-  console.log('Starting node.js on port ' + port);
-});
 
 app.listen(app.get('port'), function () {
   console.log('run at port', app.get('port'))

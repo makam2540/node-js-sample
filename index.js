@@ -56,19 +56,19 @@ function sendText (sender, msg) {
                 req.query('SELECT * FROM Question',function (err, result, fields) {
                  
                   if(text == result.recordset[0].q_topic){
-                        var Q_id = result.recordset[0].q_Id;
-                  }
+                        // var Q_id = result.recordset[0].q_Id;
+                  
                      // recordset.recordset[0].q_Id;
-                  let data = {
-                    to: sender,
-                    messages: [
-                      {
-                        type: 'text',
-                        text: result.recordset[0].q_Id
-                      }
-                    ]
+                    let data = {
+                      to: sender,
+                      messages: [
+                        {
+                          type: 'text',
+                          text: result.recordset[0].q_Id
+                        }
+                      ]
+                    }
                   }
-                
                   request({
                     headers: {
                       'Content-Type': 'application/json',

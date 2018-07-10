@@ -67,7 +67,7 @@ function sendText (sender, msg) {
                   
                     req.query('SELECT * FROM Answer ',function(err,resulta){
 
-                          for(var i=0;i<result.rowsAffected;i++){
+                          for(var i=0;i<resulta.rowsAffected;i++){
                             if(resulta.recordset[i].q_topic == Q_id){
                                 topic = resulta.recordset[i].a_topic
                             }
@@ -100,7 +100,7 @@ function sendText (sender, msg) {
                   })
                 })
           })
-         })
+    })
 
 }
 

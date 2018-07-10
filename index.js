@@ -47,20 +47,18 @@ app.post('/webhook', (req, res) => {
 })
 
 
-
-
 function sendText (sender, msg) {
   var conn = new sql.ConnectionPool(dbConfig);
   conn.connect().then(function () {
                 var req = new sql.Request(conn);
-                req.query('SELECT * FROM Question').then(function (recordset) {
-                      //recordset.recordset[0].q_Id;
+                req.query('SELECT * FROM Question q_topic = text').then(function (recordset) {
+                      // recordset.recordset[0].q_Id;
                   let data = {
                     to: sender,
                     messages: [
                       {
                         type: 'text',
-                        text: recordset.recordset[0].q_Id
+                        text: recordset.recordset
                       }
                     ]
                   }
@@ -83,11 +81,7 @@ function sendText (sender, msg) {
           })
          })
 
-
-
-  
 }
-
 
 app.listen(app.get('port'), function () {
   console.log('run at port', app.get('port'))

@@ -50,19 +50,6 @@ app.post('/webhook', (req, res) => {
   res.sendStatus(200)
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 function sendText (sender, msg) {
   var conn = new sql.ConnectionPool(dbConfig);
  
@@ -113,7 +100,7 @@ function sendText (sender, msg) {
                 })
           })
     })
-  conn.close();
+ 
 }
 
 

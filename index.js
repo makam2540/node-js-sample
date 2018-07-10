@@ -47,7 +47,7 @@ app.post('/webhook', (req, res) => {
     sendText(sender, text)
 
   res.sendStatus(200)
-})
+
 
 
 function sendText (sender, msg) {
@@ -58,7 +58,7 @@ function sendText (sender, msg) {
                 var req = new sql.Request(conn);
                 req.query('SELECT * FROM Question',function (err, result) {
                  
-                  if(result.recordset[0].q_id == text){
+                  if(result.recordset[0].q_topic == text){
                          Q_id = result.recordset[0].q_Id
                   }
                           let data = {
@@ -66,7 +66,7 @@ function sendText (sender, msg) {
                             messages: [
                               {
                                 type: 'text',
-                                text: ';;;;;;;;' //result.recordset[0].q_Id
+                                text: result.recordset[0].q_Id
                               }
                             ]
                           }
@@ -91,6 +91,8 @@ function sendText (sender, msg) {
          })
 
 }
+
+})
 
 app.listen(app.get('port'), function () {
   console.log('run at port', app.get('port'))

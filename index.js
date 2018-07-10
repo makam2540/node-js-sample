@@ -53,7 +53,7 @@ function sendText (sender, msg) {
   conn.connect(function(err) {
   
                 var req = new sql.Request(conn);
-                req.query('SELECT * FROM Question'),(function (err,recordset) {
+                req.query('SELECT * FROM Question'),function (err,recordset) {
                  
                      // recordset.recordset[0].q_Id;
                   let data = {

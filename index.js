@@ -41,7 +41,7 @@ app.post('/webhook', (req, res) => {
   console.log(text, sender, replyToken)
   console.log(typeof sender, typeof text)
   // console.log(req.body.events[0])
-    sendText(sender, msg)
+    sendText(sender, text)
 
   res.sendStatus(200)
 })
@@ -50,9 +50,9 @@ app.post('/webhook', (req, res) => {
 function sendText (sender, msg) {
   var conn = new sql.ConnectionPool(dbConfig);
   conn.connect().then(function () {
-    var msg = text;
+  
                 var req = new sql.Request(conn);
-                req.query('SELECT * FROM Question q_topic = text'),(function (err,recordset) {
+                req.query('SELECT * FROM Question q_topic = msg'),(function (err,recordset) {
                   console.log(result)
                   console.error(err)
                      // recordset.recordset[0].q_Id;

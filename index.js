@@ -51,12 +51,24 @@ app.post('/webhook', (req, res) => {
 })
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 function sendText (sender, msg) {
   var conn = new sql.ConnectionPool(dbConfig);
  
   conn.connect(function(err) {
-  
-                var req = new sql.Request(conn);
+         var req = new sql.Request(conn);
+
                 req.query('SELECT * FROM Question',function (err, result) {
                  
                   for(var i=0;i<result.rowsAffected;i++){
@@ -79,7 +91,7 @@ function sendText (sender, msg) {
                             messages: [
                               {
                                 type: 'text',
-                                text: topic
+                                text: typeOf(topic)
                               }
                             ]
                           }
@@ -101,8 +113,11 @@ function sendText (sender, msg) {
                 })
           })
     })
-
+  conn.close();
 }
+
+
+
 
 app.listen(app.get('port'), function () {
   console.log('run at port', app.get('port'))

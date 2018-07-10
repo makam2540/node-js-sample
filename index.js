@@ -59,14 +59,18 @@ function sendText (sender, msg) {
                 req.query('SELECT * FROM Question',function (err, result) {
                  
                   for(var i=0;i<result.rowsAffected;i++){
-                    if(result.recordset[0].q_topic == msg){
-                      Q_id = result.recordset[0].q_Id
+                    if(result.recordset[i].q_topic == msg){
+                      Q_id = result.recordset[i].q_Id
                     }
                   }
-                   
-
+                  
                     // req.query('SELECT * FROM Answer a_Id = '+ Q_id,function(err,resulta){
 
+                    //       for(var i=0;i<result.rowsAffected;i++){
+                    //         if(result.recordset[i].q_topic == msg){
+                    //           Q_id = result.recordset[i].q_Id
+                    //         }
+                    //       }
                    
 
                           let data = {

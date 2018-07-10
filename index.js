@@ -24,7 +24,7 @@ app.post('/webhook', (req, res) => {
           conn.connect().then(function () {
                         var req = new sql.Request(conn);
                         req.query('SELECT * FROM Question q_topic ='+msg).then(function (recordset) {
-                          res.send(recordset);
+                          // res.send(recordset);
                               // res.send(recordset);
                               // conn.close();    
                               sendText(sender, msg)                
@@ -68,6 +68,10 @@ function sendText (sender, msg) {
     if (body) console.log(body)
   })
 }
+
+app.listen(port, function() {
+  console.log('Starting node.js on port ' + port);
+});
 
 app.listen(app.get('port'), function () {
   console.log('run at port', app.get('port'))

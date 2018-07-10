@@ -54,7 +54,7 @@ function sendText (sender, msg) {
   
                 var req = new sql.Request(conn);
                 req.query('SELECT * FROM Question',function (err, result, fields) {
-                 var n = result.affectedRows
+                 var n = result.affectedRows;
                      // recordset.recordset[0].q_Id;
                   let data = {
                     to: sender,

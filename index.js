@@ -67,7 +67,7 @@ function sendText (sender, msg) {
                             messages: [
                               {
                                 type: 'text',
-                                text: 'id='+ Q_id
+                                text: 'id='+result.recordset[0].q_Id
                               }
                             ]
                           }

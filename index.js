@@ -56,7 +56,7 @@ function sendText (sender, msg) {
                 req.query('SELECT * FROM Question',function (err, result, rows) {
                   // rows.rowsAffected
                       
-                          if(result.result[0].q_topic == text){
+                          if(text == result.result[0].q_topic){
                             ques_id = result.result[0].q_Id;
                           }
                  

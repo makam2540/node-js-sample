@@ -56,7 +56,7 @@ function sendText (sender, msg) {
   conn.connect(function(err) {
   
                 var req = new sql.Request(conn);
-                req.query('SELECT * FROM Question',function (err, result, fields) {
+                req.query('SELECT * FROM Question',function (err, result) {
                  
                   if(result.recordset[0].q_topic == text){
                          Q_id = result.recordset[0].q_Id
@@ -66,7 +66,7 @@ function sendText (sender, msg) {
                             messages: [
                               {
                                 type: 'text',
-                                text: result.recordset[0].q_Id
+                                text: ';;;;;;;;' //result.recordset[0].q_Id
                               }
                             ]
                           }

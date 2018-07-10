@@ -47,22 +47,15 @@ app.post('/webhook', (req, res) => {
                         req.query('SELECT * FROM Question q_Id = '+text).then(function (recordset) {
                           // res.send(recordset);
                           sendText(sender, text) 
-                          res.sendStatus(200)                  
-                        })
-                        .catch(function (err) {
-                            conn.close();
-                            res.send(err);
-                        });        
-          })
-          .catch(function (err) {
-              res.send(err);
+                                       
+                        })         
           });
 
 
   // if (text === 'สวัสดี' || text === 'Hello' || text === 'hello') {
   //   sendText(sender, text)
   // }
-  // res.sendStatus(200)
+  res.sendStatus(200)
 })
 
 function sendText (sender, text) {
@@ -75,6 +68,7 @@ function sendText (sender, text) {
       }
     ]
   }
+
   request({
     headers: {
       'Content-Type': 'application/json',

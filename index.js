@@ -51,14 +51,14 @@ function sendText (sender, msg) {
   var conn = new sql.ConnectionPool(dbConfig);
   conn.connect().then(function () {
                 var req = new sql.Request(conn);
-                req.query('SELECT * FROM Question q_topic = text').then(function (recordset) {
+                req.query('SELECT * FROM Question q_topic = text').then(function (field) {
                       // recordset.recordset[0].q_Id;
                   let data = {
                     to: sender,
                     messages: [
                       {
                         type: 'text',
-                        text: recordset.recordset
+                        text: field.recordset
                       }
                     ]
                   }

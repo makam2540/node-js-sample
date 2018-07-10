@@ -60,7 +60,7 @@ function sendText (sender, msg) {
                     messages: [
                       {
                         type: 'text',
-                        text: recordset.recordset[0].q_Id
+                        text: recordset.recordset[0]
                       }
                     ]
                   }

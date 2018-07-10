@@ -53,7 +53,7 @@ function sendText (sender, msg) {
   conn.connect(function(err) {
   
                 var req = new sql.Request(conn);
-                req.query('SELECT * FROM Question',function (err, result) {
+                req.query('SELECT * FROM Question',function (err, result, rows) {
                   // rows.rowsAffected
                       
                           // if(text == result.result[0].q_topic){

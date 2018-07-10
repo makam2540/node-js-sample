@@ -51,18 +51,17 @@ function sendText (sender, msg) {
   var conn = new sql.ConnectionPool(dbConfig);
  
   conn.connect(function(err) {
-    if (err) throw err;
+  
                 var req = new sql.Request(conn);
-                req.query('SELECT * FROM Question'),function (err, result, fields) {
-                  if (err) throw err;
-                  console.log(result);
+                req.query('SELECT * FROM Question',function (err, result, fields) {
+                 
                      // recordset.recordset[0].q_Id;
                   let data = {
                     to: sender,
                     messages: [
                       {
                         type: 'text',
-                        text: result.result[0].q_Id
+                        text: result.recordset[0].q_Id
                       }
                     ]
                   }
@@ -82,7 +81,7 @@ function sendText (sender, msg) {
                     if (body) console.log(body)
                   })
    
-          }
+          })
          })
 
 }

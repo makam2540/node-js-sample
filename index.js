@@ -40,9 +40,27 @@ app.post('/webhook', (req, res) => {
   console.log(text, sender, replyToken)
   console.log(typeof sender, typeof text)
   // console.log(req.body.events[0])
-  if (text === 'สวัสดี' || text === 'Hello' || text === 'hello') {
-    sendText(sender, text)
-  }
+
+        var conn = new sql.ConnectionPool(dbConfig);
+          conn.connect().then(function () {
+                        var req = new sql.Request(conn);
+                        req.query('SELECT * FROM Question q_Id = '+text).then(function (recordset) {
+                          res.send(recordset);
+                          sendText(sender, text)                   
+                        })
+                        .catch(function (err) {
+                            conn.close();
+                            res.send(err);
+                        });        
+          })
+          .catch(function (err) {
+              res.send(err);
+          });
+
+
+  // if (text === 'สวัสดี' || text === 'Hello' || text === 'hello') {
+  //   sendText(sender, text)
+  // }
   res.sendStatus(200)
 })
 

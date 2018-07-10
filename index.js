@@ -55,9 +55,9 @@ function sendText (sender, msg) {
                 var req = new sql.Request(conn);
                 req.query('SELECT * FROM Question',function (err, result, rows) {
                   // rows.rowsAffected
-               
-                          if(result.result[i].q_topic == text){
-                            ques_id = result.result[i].q_Id;
+                      
+                          if(result.result[0].q_topic == text){
+                            ques_id = result.result[0].q_Id;
                           }
                  
                      // recordset.recordset[0].q_Id;

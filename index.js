@@ -49,10 +49,10 @@ app.post('/webhook', (req, res) => {
 
 function sendText (sender, msg) {
   var conn = new sql.ConnectionPool(dbConfig);
-  conn.connect().then(function () {
+  conn.connect(),(function (err) {
   
                 var req = new sql.Request(conn);
-                req.query('SELECT * FROM Question').then(function (recordset) {
+                req.query('SELECT * FROM Question'),(function (err,recordset) {
                  
                      // recordset.recordset[0].q_Id;
                   let data = {

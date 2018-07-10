@@ -15,7 +15,10 @@ app.listen(port)
 function reply(reply_token, msg) {
     let headers = {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer {Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU=}'}
+        'Authorization': 'Bearer {Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU=}'
+    }
+    
+    if (text === 'สวัสดี' || text === 'Hello' || text === 'hello') {
     let body = JSON.stringify({
         replyToken: reply_token,
         messages: [{
@@ -23,6 +26,7 @@ function reply(reply_token, msg) {
             text: msg
         }]
     })
+    }
     request.post({
         url: 'https://api.line.me/v2/bot/message/reply',
         headers: headers,

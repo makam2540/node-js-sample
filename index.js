@@ -56,7 +56,7 @@ function sendText (sender, msg) {
                 req.query('SELECT * FROM Question',function (err, result, fields) {
                  
                   if(text == result.recordset[0].q_topic){
-                        var id = result.recordset[0].q_Id;
+                        var Q_id = result.recordset[0].q_Id;
                   }
                      // recordset.recordset[0].q_Id;
                   let data = {
@@ -64,7 +64,7 @@ function sendText (sender, msg) {
                     messages: [
                       {
                         type: 'text',
-                        text: id
+                        text: result.recordset[0].q_Id
                       }
                     ]
                   }

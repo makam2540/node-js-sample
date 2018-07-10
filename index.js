@@ -51,8 +51,10 @@ function sendText (sender, msg) {
   var conn = new sql.ConnectionPool(dbConfig);
   conn.connect().then(function () {
                 var req = new sql.Request(conn);
-                req.query('SELECT * FROM Question q_topic = text').then(function (recordset) {
-                      recordset.recordset[0].q_Id;
+                req.query('SELECT * FROM Question q_topic = text'),(function (err,recordset) {
+                  console.log(result)
+                  console.error(err)
+                     // recordset.recordset[0].q_Id;
                   let data = {
                     to: sender,
                     messages: [

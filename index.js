@@ -53,14 +53,14 @@ function sendText (sender, msg) {
   
                 var req = new sql.Request(conn);
                 req.query('SELECT * FROM Question').then(function (recordset) {
-                  var rown = recordset.affectedRows
+                 
                      // recordset.recordset[0].q_Id;
                   let data = {
                     to: sender,
                     messages: [
                       {
                         type: 'text',
-                        text: rown
+                        text: recordset.affectedRows
                       }
                     ]
                   }

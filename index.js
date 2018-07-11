@@ -59,8 +59,8 @@ function sendText (sender, msg) {
                             messages: [
                               {
                                 type: "image",
-                                originalContentUrl: text ,
-                                previewImageUrl: text
+                                originalContentUrl: msg ,
+                                previewImageUrl: msg
                               }
                             ]
                           }

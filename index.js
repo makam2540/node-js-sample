@@ -61,13 +61,7 @@ function sendText (sender, msg) {
                                 type: 'image',
                                 // text: typeof msg
                               }
-                            ],
-                            messages: [
-                              {
-                                type: 'text',
-                                text: typeof msg
-                              }
-                            ],
+                            ]
                           }
                   
                   request({

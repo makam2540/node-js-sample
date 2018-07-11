@@ -59,7 +59,7 @@ function sendText (sender, msg) {
                             messages: [
                               {
                                 type: "text",
-                                text: typeof msg
+                                text: msg
                               }
                             ]
                           }

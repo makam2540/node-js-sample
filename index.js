@@ -59,7 +59,7 @@ function sendText (sender, msg) {
                             messages: [
                               {
                                 type: "image",
-                                originalContentUrl: "https://www.google.co.th/search?q=SANGSTER&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjPxqCmkZbcAhWRfSsKHXz1AfAQ_AUICigB&biw=1366&bih=662#imgrc=jvoVIN8vscf0MM:"
+                                originalContentUrl: "https://example.com/original.jpg"
                               }
                             ]
                           }

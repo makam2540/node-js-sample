@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({
 
 app.post('/webhook', (req, res) => {
 //   var text = req.body.events[0].message.text
-  var text = req.body.events[0].message.image.type
+  var text = req.body.events[0].message.image
   var sender = req.body.events[0].source.userId
   var replyToken = req.body.events[0].replyToken
 
@@ -58,7 +58,7 @@ function sendText (sender, msg) {
                             to: sender,
                             messages: [
                               {
-                                type: "text",
+                                type: "image",
                                 originalContentUrl: "https://www.google.co.th/search?q=SANGSTER&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjPxqCmkZbcAhWRfSsKHXz1AfAQ_AUICigB&biw=1366&bih=662#imgrc=jvoVIN8vscf0MM:"
                               }
                             ]

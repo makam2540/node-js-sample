@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({
 
 app.post('/webhook', (req, res) => {
   // var text = req.body.events[0].message.text
-  var text = req.body.events[0].image
+  var text = req.body.events[0].message
   var sender = req.body.events[0].source.userId
   var replyToken = req.body.events[0].replyToken
 
@@ -69,7 +69,7 @@ function sendText (sender, msg) {
                       'Content-Type': 'application/json',
                       'Authorization': 'Bearer Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU='
                     },
-                    url:'https://api.line.me/v2/bot/message/{messageId}/content',   // 'https://api.line.me/v2/bot/message/push',
+                    url: 'https://api.line.me/v2/bot/message/push',
                     method: 'POST',
                     body: data,
                     json: true

@@ -59,8 +59,8 @@ function sendText (sender, msg) {
                             messages: [
                               {
                                 type: "image",
-                                originalContentUrl: msg ,
-                                previewImageUrl: msg
+                                originalContentUrl: "https://ih1.redbubble.net/image.449196043.4904/st%2Csmall%2C215x235-pad%2C210x230%2Cf8f8f8.lite-1u1.jpg" ,
+                                previewImageUrl: "https://ih1.redbubble.net/image.449196043.4904/st%2Csmall%2C215x235-pad%2C210x230%2Cf8f8f8.lite-1u1.jpg"
                               }
                             ]
                           }
@@ -70,8 +70,8 @@ function sendText (sender, msg) {
                       'Content-Type': 'application/json',
                       'Authorization': 'Bearer Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU='
                     },
-                    url: 'https://api.line.me/v2/bot/message/{messageId}/content',
-                    method: 'GET',
+                    url: 'https://api.line.me/v2/bot/message/push',
+                    method: 'POST',
                     body: data,
                     json: true
                   }, function (err, res, body) {

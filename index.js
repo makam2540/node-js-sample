@@ -4,6 +4,11 @@ var request = require('request')
 var app = express()
 
 const line = require('@line/bot-sdk');
+
+const client = new line.Client({
+    channelAccessToken: 'Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU='
+  });
+
 var Q_id
 var topic
 
@@ -37,37 +42,42 @@ app.use(bodyParser.urlencoded({
                       }                      
     };
 
-    const client = new line.Client({
-        channelAccessToken: 'Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU='
-      });
-
 app.post('/webhook', (req, res) => {
-//   var text = req.body.events[0].message.text
-  var text = req.body.events[0].message.image
+  var text = req.body.events[0].message.id
+//   var text = req.body.events[0].message.image
   var sender = req.body.events[0].source.userId
   var replyToken = req.body.events[0].replyToken
 
   console.log(text, sender, replyToken)
   console.log(typeof sender, typeof text)
-  
-    sendText(sender, text)
+
+  client.getMessageContent(text)
+     .then((stream) => {
+        stream.on('data', (chunk) => {
+            sendText(sender, text)
+    });
+        stream.on('error', (err) => {
+        // error handling
+    });
+    });
 
   res.sendStatus(200)
 })
 
+
+
+
+
+
 function sendText (sender, msg) {
+                    
 
-
-                    client.getMessageContent(msg)
-                    .then((stream) => {
-                    stream.on('data', (chunk) => {
-                        let data = {
+                            let data = {
                             to: sender,
                             messages: [
                               {
-                                type: "text",
-                                text : "msg"
-                                
+                                type: "image",
+                                text : "ssssss"
                               }
                             ]
                           }
@@ -77,22 +87,21 @@ function sendText (sender, msg) {
                       'Content-Type': 'application/json',
                       'Authorization': 'Bearer Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU='
                     },
-                    url: 'https://api.line.me/v2/bot/message/{messageId}/content',
-                    method: 'GET',
-                    body: stream,
+                    url: 'https://api.line.me/v2/bot/message/push',
+                    method: 'POST',
+                    body: data,
                     json: true
                   }, function (err, res, body) {
                     if (err) console.log('error')
                     if (res) console.log('success')
                     if (body) console.log(body)
-                  })   
+                  })
 
-                    });
-                    stream.on('error', (err) => {
-                        // error handling
-                    });
-                    });
-                }                           
+
+              
+                   
+                }
+                             
 
 app.listen(app.get('port'), function () {
   console.log('run at port', app.get('port'))

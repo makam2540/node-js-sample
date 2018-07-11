@@ -59,8 +59,8 @@ function sendText (sender, msg) {
                             messages: [
                               {
                                 type: "image",
-                                originalContentUrl: msg ,
-                                previewImageUrl: msg
+                                originalContentUrl: "https://ih1.redbubble.net/image.449196043.4904/st%2Csmall%2C215x235-pad%2C210x230%2Cf8f8f8.lite-1u1.jpg" ,
+                                previewImageUrl: "https://ih1.redbubble.net/image.449196043.4904/st%2Csmall%2C215x235-pad%2C210x230%2Cf8f8f8.lite-1u1.jpg"
                               }
                             ]
                           }

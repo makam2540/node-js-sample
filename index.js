@@ -58,8 +58,10 @@ function sendText (sender, msg) {
                             to: sender,
                             messages: [
                               {
-                                type: "image",
-                                originalContentUrl: "https://example.com/original.jpg"
+                                type: "text",
+                                text : 'photo!!!!!'
+
+                                // originalContentUrl: "https://example.com/original.jpg"
                               }
                             ]
                           }

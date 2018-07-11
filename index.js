@@ -59,7 +59,8 @@ function sendText (sender, msg) {
                             messages: [
                               {
                                 type: "image",
-                                originalContentUrl: "https://scontent.fbkk5-7.fna.fbcdn.net/v/t1.15752-9/36314283_438547796620017_7038609657568428032_n.jpg?_nc_cat=0&oh=854ac2d610c498320db86c235519ab83&oe=5BE7C9FA"
+                                originalContentUrl: "https://scontent.fbkk5-7.fna.fbcdn.net/v/t1.15752-9/36314283_438547796620017_7038609657568428032_n.jpg?_nc_cat=0&oh=854ac2d610c498320db86c235519ab83&oe=5BE7C9FA",
+                                previewImageUrl: "https://scontent.fbkk5-7.fna.fbcdn.net/v/t1.15752-9/36314283_438547796620017_7038609657568428032_n.jpg?_nc_cat=0&oh=854ac2d610c498320db86c235519ab83&oe=5BE7C9FA"
                               }
                             ]
                           }

@@ -38,7 +38,7 @@ app.use(bodyParser.urlencoded({
     };
 
 app.post('/webhook', (req, res) => {
-  var text = req.body.events[0].message.text
+//   var text = req.body.events[0].message.text
   var text = req.body.events[0].message.image
   var sender = req.body.events[0].source.userId
   var replyToken = req.body.events[0].replyToken
@@ -59,8 +59,8 @@ function sendText (sender, msg) {
                             messages: [
                               {
                                 type: "image",
-                                originalContentUrl: "https://ih1.redbubble.net/image.449196043.4904/st%2Csmall%2C215x235-pad%2C210x230%2Cf8f8f8.lite-1u1.jpg" ,
-                                previewImageUrl: "https://ih1.redbubble.net/image.449196043.4904/st%2Csmall%2C215x235-pad%2C210x230%2Cf8f8f8.lite-1u1.jpg"
+                                originalContentUrl: msg ,
+                                previewImageUrl: msg
                               }
                             ]
                           }

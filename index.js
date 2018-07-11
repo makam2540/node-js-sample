@@ -46,61 +46,47 @@ app.post('/webhook', (req, res) => {
 
   console.log(text, sender, replyToken)
   console.log(typeof sender, typeof text)
-  
-const client = new line.Client({
-  channelAccessToken: 'Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU='
-});
 
-client.getMessageContent(text)    
-// var text1 = getMessageContent(text)
-  .then((stream) => {
-    stream.on('data', (chunk) => {
-                                        messages: [
-                                          {
-                                              type : "text",
-                                              text : "success"
-                                          }
-                                        ]
-    });
-    stream.on('error', (err) => {
-      // error handling
-    });
-  });
+    var gettext = req.getMessageContent(text)
+
+  sendText(sender, gettext)
+
   res.sendStatus(200)
+  
 })
 
 
 
-// function sendText (sender, msg) {
+function sendText (sender, msg) {
 
-//                           let data = {
-//                             to: sender,
-//                             messages: [
-//                               {
-//                                   type : "text",
-//                                   text : "success"
-//                                 // type: "image",
-//                                 // originalContentUrl: msg ,
-//                                 // previewImageUrl: msg
-//                               }
-//                             ]
-//                           }
+                          let data = {
+                            to: sender,
+                            messages: [
+                              {
+                                  type : "text",
+                                  text : "success"
+                                // type: "image",
+                                // originalContentUrl: msg ,
+                                // previewImageUrl: msg
+                              }
+                            ]
+                          }
                   
-//                   request({
-//                     headers: {
-//                       'Content-Type': 'application/json',
-//                       'Authorization': 'Bearer Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU='
-//                     },
-//                     url: 'https://api.line.me/v2/bot/message/{messageId}/content',
-//                     method: 'GET',
-//                     body: data,
-//                     json: true
-//                   }, function (err, res, body) {
-//                     if (err) console.log('error')
-//                     if (res) console.log('success')
-//                     if (body) console.log(body)
-//                   })   
-// }
+                  request({
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU='
+                    },
+                    url: 'https://api.line.me/v2/bot/message/{messageId}/content',
+                    method: 'GET',
+                    body: data,
+                    json: true
+                  }, function (err, res, body) {
+                    if (err) console.log('error')
+                    if (res) console.log('success')
+                    if (body) console.log(body)
+                  })   
+}
 app.listen(app.get('port'), function () {
   console.log('run at port', app.get('port'))
 })

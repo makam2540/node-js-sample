@@ -58,7 +58,7 @@ function sendText (sender, msg) {
                             to: sender,
                             messages: [
                               {
-                                type: "image",
+                                type: "text",
                                 text: typeof msg
                               }
                             ]

@@ -4,7 +4,6 @@ var request = require('request')
 var app = express()
 
 const line = require('@line/bot-sdk');
-
 var Q_id
 var topic
 
@@ -39,67 +38,66 @@ app.use(bodyParser.urlencoded({
     };
 
 app.post('/webhook', (req, res) => {
-  var text = req.body.events[0].message.id
-//   var text = req.body.events[0].message.id
+//   var text = req.body.events[0].message.text
+  var text = req.body.events[0].message.image
   var sender = req.body.events[0].source.userId
   var replyToken = req.body.events[0].replyToken
 
   console.log(text, sender, replyToken)
   console.log(typeof sender, typeof text)
   
-const client = new line.Client({
-  channelAccessToken: 'Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU='
-});
+    sendText(sender, text)
 
-client.getMessageContent(text)    
-// var text1 = getMessageContent(text)
-  .then((stream) => {
-    stream.on('data', (chunk) => {
-                                const message = {
-                                    to : sender,
-                                    type: 'text',
-                                    text: 'Hello World!'
-                                };
-    });
-    stream.on('error', (err) => {
-      // error handling
-    });
-  });
   res.sendStatus(200)
 })
 
 
+const client = new line.Client({
+  channelAccessToken: 'Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU='
+});
 
-// function sendText (sender, msg) {
 
-//                           let data = {
-//                             to: sender,
-//                             messages: [
-//                               {
-//                                   type : "text",
-//                                   text : "success"
-//                                 // type: "image",
-//                                 // originalContentUrl: msg ,
-//                                 // previewImageUrl: msg
-//                               }
-//                             ]
-//                           }
+
+
+
+function sendText (sender, msg) {
+
+                    client.getMessageContent(msg)
+                    .then((stream) => {
+                    stream.on('data', (chunk) => {
+                        let data = {
+                            to: sender,
+                            messages: [
+                              {
+                                type: "image",
+                                originalContentUrl: "https://ih1.redbubble.net/image.449196043.4904/st%2Csmall%2C215x235-pad%2C210x230%2Cf8f8f8.lite-1u1.jpg" ,
+                                previewImageUrl: "https://ih1.redbubble.net/image.449196043.4904/st%2Csmall%2C215x235-pad%2C210x230%2Cf8f8f8.lite-1u1.jpg"
+                              }
+                            ]
+                          }
                   
-//                   request({
-//                     headers: {
-//                       'Content-Type': 'application/json',
-//                       'Authorization': 'Bearer Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU='
-//                     },
-//                     url: 'https://api.line.me/v2/bot/message/{messageId}/content',
-//                     method: 'GET',
-//                     body: data,
-//                     json: true
-//                   }, function (err, res, body) {
-//                     if (err) console.log('error')
-//                     if (res) console.log('success')
-//                     if (body) console.log(body)
-//                   })   
-// }
+                  request({
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU='
+                    },
+                    url: 'https://api.line.me/v2/bot/message/push',
+                    method: 'POST',
+                    body: data,
+                    json: true
+                  }, function (err, res, body) {
+                    if (err) console.log('error')
+                    if (res) console.log('success')
+                    if (body) console.log(body)
+                  })
+                    });
+                    stream.on('error', (err) => {
+                        // error handling
+                    });
+                    });
+
+                             
+}
 app.listen(app.get('port'), function () {
   console.log('run at port', app.get('port'))
 })

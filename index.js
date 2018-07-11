@@ -87,7 +87,7 @@ function sendText (sender, msg) {
                     if (body) console.log(body)
                   })   
 }
-app.listen(app.get('port'), function () {
-  console.log('run at port', app.get('port'))
+app.listen(app.get('get'), function () {
+  console.log('run at port', app.get('get'))
 })
 

@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({
 
 app.post('/webhook', (req, res) => {
   // var text = req.body.events[0].message.text
-  var text = req.body.events[0].message.text
+  var text = req.body.events[0].message.image
   var sender = req.body.events[0].source.userId
   var replyToken = req.body.events[0].replyToken
 
@@ -58,10 +58,16 @@ function sendText (sender, msg) {
                             to: sender,
                             messages: [
                               {
+                                type: 'image',
+                                // text: typeof msg
+                              }
+                            ],
+                            messages: [
+                              {
                                 type: 'text',
                                 text: typeof msg
                               }
-                            ]
+                            ],
                           }
                   
                   request({

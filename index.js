@@ -56,6 +56,7 @@ client.getMessageContent(text)
   .then((stream) => {
     stream.on('data', (chunk) => {
                                 const message = {
+                                    to : sender,
                                     type: 'text',
                                     text: 'Hello World!'
                                 };

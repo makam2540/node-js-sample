@@ -38,8 +38,8 @@ app.use(bodyParser.urlencoded({
     };
 
 app.post('/webhook', (req, res) => {
-  // var text = req.body.events[0].message.text
-  var text = req.body.events[0].message.sticker
+  var text = req.body.events[0].message.text
+//   var text = req.body.events[0].message.sticker
   var sender = req.body.events[0].source.userId
   var replyToken = req.body.events[0].replyToken
 

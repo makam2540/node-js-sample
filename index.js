@@ -3,6 +3,7 @@ var bodyParser = require('body-parser')
 var request = require('request')
 var app = express()
 
+var fs = require('fs')
 const line = require('@line/bot-sdk');
 
 var Q_id
@@ -64,14 +65,13 @@ function sendText (sender, msg) {
   .then((stream) => {
     stream.on('data', (chunk) => {
 
-      var a = console.log(chunk)
-
+      
                           let data = {
                             to: sender,
                             messages: [
                               {
                                 type: "text",
-                                text : " "+ a
+                                text : ''+ chunk
                                 
                               }
                             ]

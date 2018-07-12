@@ -46,7 +46,7 @@ const client = new line.Client({
 
 app.post('/webhook', (req, res) => {
 //   var text = req.body.events[0].message.text
-  var text = req.body.events[0].message.type
+  var text = req.body.events[0].message.id
   var sender = req.body.events[0].source.userId
   var replyToken = req.body.events[0].replyToken
 
@@ -86,11 +86,13 @@ function sendText (sender, msg) {
                     method: 'POST',
                     body: data,
                     json: true
-                  }, function (err, res, body) {
+                  } , 
+                    function (err, res, body) {
                     if (err) console.log('error')
                     if (res) console.log('success')
                     if (body) console.log(body)
-                  })   
+                  }
+                )   
 
 
 });

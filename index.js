@@ -3,6 +3,7 @@ var bodyParser = require('body-parser')
 var request = require('request')
 var app = express()
 
+const line = require('@line/bot-sdk');
 
 var Q_id
 var topic
@@ -51,9 +52,15 @@ app.post('/webhook', (req, res) => {
   res.sendStatus(200)
 })
 
+const client = new line.Client({
+  channelAccessToken: 'Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU='
+});
 
 function sendText (sender, msg) {
 
+  client.getMessageContent('<messageId>')
+  .then((stream) => {
+    stream.on('data', (chunk) => {
                           let data = {
                             to: sender,
                             messages: [
@@ -80,6 +87,14 @@ function sendText (sender, msg) {
                     if (res) console.log('success')
                     if (body) console.log(body)
                   })   
+
+                });
+                stream.on('error', (err) => {
+                  // error handling
+                });
+              });
+
+
 }
 app.listen(app.get('port'), function () {
   console.log('run at port', app.get('port'))

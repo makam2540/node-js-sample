@@ -74,7 +74,7 @@ function sendText (sender, msg) {
                             messages: [
                               {
                                 type: "text",
-                                text :  ''+ data1
+                                text :  ''+ chunk
                                 
                               }
                             ]

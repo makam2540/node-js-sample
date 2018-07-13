@@ -48,7 +48,10 @@ app.post('/webhook', (req, res) => {
   console.log(text, sender, replyToken)
   console.log(typeof sender, typeof text)
   // console.log(JSON.stringify(req.headers))
-    sendText(sender, console.log(JSON.stringify(req.headers)))
+
+  req.setEncoding(text)
+
+    sendText(sender, text)
 
   res.sendStatus(200)
 })
@@ -65,13 +68,13 @@ function sendText (sender, msg) {
   .then((stream) => {
     stream.on('data', (chunk) => {
 
-      
+      data1 += chunk
                           let data = {
                             to: sender,
                             messages: [
                               {
                                 type: "image",
-                                text :  ''+ chunk
+                                text :  ''+ data1
                                 
                               }
                             ]
@@ -97,9 +100,10 @@ function sendText (sender, msg) {
                   // error handling
                 });
               });
-
-
 }
+
+
+
 app.listen(app.get('port'), function () {
   console.log('run at port', app.get('port'))
 })

@@ -47,8 +47,8 @@ app.post('/webhook', (req, res) => {
 
   console.log(text, sender, replyToken)
   console.log(typeof sender, typeof text)
-  console.log(JSON.stringify(req.headers))
-    sendText(sender, text)
+  // console.log(JSON.stringify(req.headers))
+    sendText(sender, console.log(JSON.stringify(req.headers)))
 
   res.sendStatus(200)
 })
@@ -71,7 +71,7 @@ function sendText (sender, msg) {
                             messages: [
                               {
                                 type: "image",
-                                text :  ''+ headerss
+                                text :  ''+ chunk
                                 
                               }
                             ]

@@ -68,7 +68,7 @@ function sendText (sender, msg) {
   .then((stream) => {
     stream.on('data', (chunk) => {
 
-      data1 += chunk
+      // data1 += chunk
                           let data = {
                             to: sender,
                             messages: [

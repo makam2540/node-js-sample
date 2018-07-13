@@ -70,7 +70,7 @@ function sendText (sender, msg) {
   .then((stream) => {
     stream.on('data', (chunk) => {
 
-      chunks.push(chunk)
+      // chunks.push(chunk)
                           
 
                 });
@@ -83,7 +83,7 @@ function sendText (sender, msg) {
                     messages: [
                       {
                         type: "text",
-                        text :  '=='+ chunks
+                        text :  '=='+ chunk
                         
                       }
                     ]

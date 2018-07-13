@@ -71,7 +71,7 @@ function sendText (sender, msg) {
                             messages: [
                               {
                                 type: "image",
-                                text : ''+ chunk
+                                text : ''+ console.log(JSON.stringify(req.headers))
                                 
                               }
                             ]

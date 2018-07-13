@@ -70,26 +70,48 @@ function sendText (sender, msg) {
   .then((stream) => {
     stream.on('data', (chunk) => {
 
-      // chunks.push(chunk)
+                          let data = {
+                            to: sender,
+                            messages: [
+                              {
+                                type: "text",
+                                text :  '=='+ chunk
+                                
+                              }
+                            ]
+                          }
+
+                    request({
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU='
+                    },
+                    url: 'https://api.line.me/v2/bot/message/push',
+                    method: 'POST',
+                    body: data,
+                    json: true
+                    }, function (err, res, body) {
+                    if (err) console.log('error')
+                    if (res) console.log('success')
+                    if (body) console.log(body)
+                    })    // end request
                           
 
                 });
-                stream.on('end', (err) => {
-
-                        // var buffer = Buffer.concat(chunks)
+                stream.on('err', (err) => {
 
                   let data = {
                     to: sender,
                     messages: [
                       {
                         type: "text",
-                        text :  '=='+ chunk
+                        text :  '=err='
                         
                       }
                     ]
                   }
-          
-          request({
+
+            request({
             headers: {
               'Content-Type': 'application/json',
               'Authorization': 'Bearer Rz8z1ee8jjPGKgYsiVruxdBDpWA4ryYEh5QKu7KLtb4o1HN3h38LHyWUEoWYOGVolNmGP1fFw7UbxocelHU/0Y/j+b2/jch/cpqEW6dhyi8smlFI+vsQVttuzLtCZPHm5K7MNg39sFK7Z8jWxhv7ngdB04t89/1O/w1cDnyilFU='
@@ -98,11 +120,13 @@ function sendText (sender, msg) {
             method: 'POST',
             body: data,
             json: true
-          }, function (err, res, body) {
+            }, function (err, res, body) {
             if (err) console.log('error')
             if (res) console.log('success')
             if (body) console.log(body)
-          })    // end request
+            })    // end request
+
+                  
                 });
               });
 

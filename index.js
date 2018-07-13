@@ -65,7 +65,7 @@ function sendText (sender, msg) {
   });
 
   client.getMessageContent(msg)
-     setEncoding(msg)
+    //  setEncoding(msg)
   .then((stream) => {
     stream.on('data', (chunk) => {
 

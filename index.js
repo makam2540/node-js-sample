@@ -83,7 +83,7 @@ function sendText (sender, msg) {
                     messages: [
                       {
                         type: "text",
-                        text :  ''+ chunks
+                        text :  '=='+ buffer
                         
                       }
                     ]

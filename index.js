@@ -76,14 +76,14 @@ function sendText (sender, msg) {
                 });
                 stream.on('end', (err) => {
 
-                  var buffer = Buffer.concat(chunks)
+                        // var buffer = Buffer.concat(chunks)
 
                   let data = {
                     to: sender,
                     messages: [
                       {
                         type: "text",
-                        text :  '=='+ buffer
+                        text :  '=='+ chunks
                         
                       }
                     ]

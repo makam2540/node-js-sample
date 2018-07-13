@@ -49,7 +49,7 @@ app.post('/webhook', (req, res) => {
   console.log(typeof sender, typeof text)
   // console.log(JSON.stringify(req.headers))
 
-  req.setEncoding(text)
+  // req.setEncoding(text)
 
     sendText(sender, text)
 

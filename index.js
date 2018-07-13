@@ -73,7 +73,7 @@ function sendText (sender, msg) {
                             to: sender,
                             messages: [
                               {
-                                type: "image",
+                                type: "text",
                                 text :  ''+ data1
                                 
                               }
@@ -93,14 +93,15 @@ function sendText (sender, msg) {
                     if (err) console.log('error')
                     if (res) console.log('success')
                     if (body) console.log(body)
-                  })   
+                  })    // end request
 
                 });
                 stream.on('error', (err) => {
                   // error handling
                 });
               });
-}
+
+} // end function
 
 
 
